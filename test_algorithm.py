@@ -1,5 +1,5 @@
 """ 
-Testing the runtime of song_recommendation.py
+Testing the functionality of song_recommendation.py -- works
 """
 
 import time
