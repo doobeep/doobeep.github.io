@@ -4,8 +4,8 @@ import random
 # Step 1: Get user input from the console
 def get_user_input():
     try:
-        eng = float(input("Enter energy rating (0-10): "))  # Prompt for energy input
-        var = float(input("Enter emotion rating (0-10): "))  # Prompt for emotion input
+        eng = float(input("on a scale of 0 - no energy to 10 - fully energized, how is your energy?: "))  # Prompt for energy input
+        var = float(input("on a scale of 0 - sad, to 5 - neutral, to 10 - happy, how is your mood?: "))  # Prompt for emotion input
         
         # Ensure the input is within the valid range
         if not (0 <= eng <= 10) or not (0 <= var <= 10):
@@ -88,9 +88,7 @@ def main():
     closest_song = find_closest_song(tracks, scaled_eng, scaled_var)
     
     if closest_song:
-        print(f"Closest Song: {closest_song[0]}")
-        print(f"Album: {closest_song[1]}")
-        print(f"Artists: {closest_song[2]}")
+        print(f"I recommend listening to {closest_song[0]} ({closest_song[1]}) by {closest_song[2]}!")
     else:
         print("No matching song found.")
 

@@ -63,8 +63,8 @@ def generate_runtime_test_results():
         writer.writerow(["Number of Rows", "Runtime (ms)"])
 
         # Test for n ranging from 0 to 10,000 with at least 99 data points
-        step = 101
-        for n in range(0, 10001, step):
+        step = 50
+        for n in range(0, 20000, step):
             runtime = test_runtime_on_dummy_data(n)
             writer.writerow([n, runtime])
             print(f"Tested n={n}, Runtime={runtime:.2f} ms")
