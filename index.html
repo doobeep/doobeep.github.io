@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset=utf-8 />
-        <title>How are you feeling?</title>
-         <script type="text/javascript" src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
-        </style>
-    </head>
-    <body style="margin: 0; padding: 0;">
+  <head>
+    <meta charset="UTF-8">
+    <title> mood ring </title>
+    <script type="text/javascript" src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+  </head>
+  <body style="margin: 0; padding: 0;">
     <canvas id="gl-canvas" width="600" height="600" style="border: 1px solid black;"></canvas>
 
-        <script>
+    <script>
       var canvas = document.getElementById("gl-canvas");
       var gl = canvas.getContext("webgl");
       if (!gl) {
         console.error("WebGL not supported");
         return;
       }
-    // Vertex shader program
+
+      // Vertex shader program
       var vertexShaderSource = `
         attribute vec2 aPosition;
         void main() {
@@ -76,24 +76,30 @@
       gl.clearColor(1, 1, 1, 1);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
-      // Draw the 2D coordinate plane
+      // Draw the 2D coordinate plane with grid lines
       function drawPlane() {
-        var planeVertices = new Float32Array([
-          -1, 0,  // X-axis
-           1, 0,
-           0, -1, // Y-axis
-           0, 1
-        ]);
+        var gridLines = [];
 
-        var planeBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, planeBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, planeVertices, gl.STATIC_DRAW);
+        // Vertical grid lines
+        for (var x = -1; x <= 1; x += 0.1) {
+          gridLines.push(x, -1, x, 1);
+        }
+
+        // Horizontal grid lines
+        for (var y = -1; y <= 1; y += 0.1) {
+          gridLines.push(-1, y, 1, y);
+        }
+
+        var gridBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, gridBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(gridLines), gl.STATIC_DRAW);
 
         gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
         gl.enableVertexAttribArray(aPosition);
 
-        gl.uniform4f(uColor, 0, 0, 0, 1); // Black color for axes
-        gl.drawArrays(gl.LINES, 0, 4);
+        // Draw grid lines in black
+        gl.uniform4f(uColor, 0, 0, 0, 1);
+        gl.drawArrays(gl.LINES, 0, gridLines.length / 2);
       }
 
       drawPlane();
