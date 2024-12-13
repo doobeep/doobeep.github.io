@@ -2,151 +2,18 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>2D? </title>
+    <title>music1</title>
     <script type="text/javascript" src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
   </head>
   <body style="margin: 0; padding: 0;">
-    <canvas id="gl-canvas" width="600" height="600" style="border: 1px solid black;"></canvas>
-
+    <center>
+    <canvas id="grid" 
+      width="610" height="610" style="background: #EFEFEF" style="border: 1px solid #00ff00;"></canvas>
+    </center>
+    
     <script>
-      var canvas = document.getElementById("gl-canvas");
-      var gl = canvas.getContext("webgl");
-      if (!gl) {
-        console.error("WebGL not supported");
-        return;
-      }
-
-      // Vertex shader program
-      var vertexShaderSource = `
-        attribute vec2 aPosition;
-        void main() {
-          gl_Position = vec4(aPosition, 0.0, 1.0);
-        }
-      `;
-
-      // Fragment shader program
-      var fragmentShaderSource = `
-        precision mediump float;
-        uniform vec4 uColor;
-        void main() {
-          gl_FragColor = uColor;
-        }
-      `;
-
-      function createShader(gl, type, source) {
-        var shader = gl.createShader(type);
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-          console.error("Shader compilation error: ", gl.getShaderInfoLog(shader));
-          gl.deleteShader(shader);
-          return null;
-        }
-        return shader;
-      }
-
-      function createProgram(gl, vertexShader, fragmentShader) {
-        var program = gl.createProgram();
-        gl.attachShader(program, vertexShader);
-        gl.attachShader(program, fragmentShader);
-        gl.linkProgram(program);
-        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-          console.error("Program link error: ", gl.getProgramInfoLog(program));
-          gl.deleteProgram(program);
-          return null;
-        }
-        return program;
-      }
-
-      var vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
-      var fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
-      var program = createProgram(gl, vertexShader, fragmentShader);
-
-      gl.useProgram(program);
-
-      var aPosition = gl.getAttribLocation(program, "aPosition");
-      var uColor = gl.getUniformLocation(program, "uColor");
-
-      // Set the initial viewport and clear the canvas
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.clearColor(1, 1, 1, 1); // White background
-      gl.clear(gl.COLOR_BUFFER_BIT);
-
-      // Draw the grid lines with X and Y axis
-      function drawGrid() {
-        var gridLines = [];
-
-        // Vertical grid lines (for x = -1 to 1, increment by 0.1)
-        for (var x = -1; x <= 1; x += 0.1) {
-          gridLines.push(x, -1, x, 1);  // Line from (-1, x) to (1, x)
-        }
-
-        // Horizontal grid lines (for y = -1 to 1, increment by 0.1)
-        for (var y = -1; y <= 1; y += 0.1) {
-          gridLines.push(-1, y, 1, y);  // Line from (y, -1) to (y, 1)
-        }
-
-        // Buffer for grid lines
-        var gridBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, gridBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(gridLines), gl.STATIC_DRAW);
-
-        gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(aPosition);
-
-        gl.uniform4f(uColor, 0.8, 0.8, 0.8, 1); // Light gray color for grid lines
-        gl.drawArrays(gl.LINES, 0, gridLines.length / 2);
-      }
-
-      // Draw the X and Y axes
-      function drawAxes() {
-        var axes = [
-          -1, 0, 1, 0,  // X-axis (from (-1, 0) to (1, 0))
-          0, -1, 0, 1   // Y-axis (from (0, -1) to (0, 1))
-        ];
-
-        var axesBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, axesBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(axes), gl.STATIC_DRAW);
-
-        gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(aPosition);
-
-        gl.uniform4f(uColor, 0, 0, 0, 1); // Black color for axes
-        gl.lineWidth(2); // Make axes more defined
-        gl.drawArrays(gl.LINES, 0, axes.length / 2);
-      }
-
-      drawGrid();
-      drawAxes();
-
-      var points = []; // Array to store points
-
-      // Plot a point based on mouse click
-      canvas.addEventListener("click", function(event) {
-        var rect = canvas.getBoundingClientRect();
-        var x = (event.clientX - rect.left) / canvas.width * 2 - 1;
-        var y = (canvas.height - (event.clientY - rect.top)) / canvas.height * 2 - 1;
-
-        // Add the point to the array
-        points.push([x, y]);
-
-        // Clear the canvas and redraw grid, axes, and points
-        gl.clear(gl.COLOR_BUFFER_BIT);
-        drawGrid();
-        drawAxes();
-
-        // Draw all points
-        var pointsBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, pointsBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(points.flat()), gl.STATIC_DRAW);
-
-        gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(aPosition);
-
-        gl.uniform4f(uColor, 1, 0, 0, 1); // Red color for the points
-        gl.drawArrays(gl.POINTS, 0, points.length);
-      });
+      
+      
     </script>
   </body>
 </html>
