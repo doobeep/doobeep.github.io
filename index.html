@@ -54,7 +54,7 @@
         ctx.moveTo(305,5);
         ctx.lineTo(305,605);
       
-      for(var i=5; i<=605; i=i+30) {
+      for(var i=5; i<=605; i=i+60) {
         //x-ticks
         ctx.moveTo(i,302);
         ctx.lineTo(i,307);
@@ -62,8 +62,8 @@
         ctx.moveTo(302,i);
         ctx.lineTo(307,1);
         //label the tick marks
-        ctx.fillText((((i-5)/30)/20),i-5,315);
-        ctx.fillText((1-((i-5)/30)/20),307,i+5);
+        ctx.fillText((((i-5)/30)/10),i-5,315);
+        ctx.fillText((1-((i-5)/30)/10),307,i+5);
       }
       ctx.strokeStyle="ff0000";
       ctx.stroke();
