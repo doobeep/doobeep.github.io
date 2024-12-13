@@ -46,8 +46,16 @@
 
       //x-axis
       ctx.beginPath();
-      ctx.moveTo(5,305);
-      ctx.lineTo(605,305);
+        ctx.moveTo(5,305);
+        ctx.lineTo(605,305);
+      
+      for(var i=5; i<=605; i=i+30) {
+        ctx.moveTo(i,302);
+        ctx.lineTo(i,307);
+
+        //label the tick marks
+        ctx.fillText((((i-5)/30)/100),i-5,315);
+      }
       ctx.strokeStyle="ff0000";
       ctx.stroke();
       
