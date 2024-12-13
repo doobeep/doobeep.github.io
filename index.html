@@ -44,20 +44,31 @@
           ctx.stroke();
       }
 
-      //x-axis
+     
       ctx.beginPath();
+
+       //x-axis
         ctx.moveTo(5,305);
         ctx.lineTo(605,305);
+      //y-axis
+        ctx.moveTo(305,5);
+        ctx.lineTo(305,605);
       
       for(var i=5; i<=605; i=i+30) {
+        //x-ticks
         ctx.moveTo(i,302);
         ctx.lineTo(i,307);
-
+        //y-ticks
+        ctx.moveTo(302,i);
+        ctx.lineTo(307,1);
         //label the tick marks
+        ctx.fillText((((i-10)/30)/10),i-5,315);
         ctx.fillText((((i-5)/30)/10),i-5,315);
       }
       ctx.strokeStyle="ff0000";
       ctx.stroke();
+
+      
       
     </script>
   </body>
