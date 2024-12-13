@@ -8,7 +8,7 @@
   <body style="margin: 0; padding: 0;">
     <center>
     <canvas id="grid" 
-      width="610" height="610" style="background: #fcfcfc" style="border: 1px solid #ffa500;"></canvas>
+      width="610" height="610" style="background: #fcfcfc; border: 2px solid #ffa500;"></canvas>
     </center>
     
     <script type="text/javascript">
@@ -44,6 +44,12 @@
           ctx.stroke();
       }
 
+      //x-axis
+      ctx.beginPath();
+      ctx.moveTo(5,305);
+      ctx.lineTo(605,305);
+      ctx.strokeStyle="ff0000";
+      ctx.stroke();
       
     </script>
   </body>
