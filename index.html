@@ -46,14 +46,17 @@
 
      
       ctx.beginPath();
-
        //x-axis
         ctx.moveTo(5,305);
         ctx.lineTo(605,305);
+         ctx.strokeStyle="#ff0700";
+        ctx.stroke();
+      
+      ctx.beginPath();
       //y-axis
         ctx.moveTo(305,5);
         ctx.lineTo(305,605);
-       ctx.strokeStyle="#ff0700";
+        ctx.strokeStyle="#ff0700";
         ctx.stroke();
       
       for(var i=5; i<=605; i=i+60) {
