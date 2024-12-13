@@ -64,8 +64,8 @@
         ctx.moveTo(302,i);
         ctx.lineTo(308,1);
         //label the tick marks
-        ctx.fillText((((i-5)/30)/20),i-5,315);
-        ctx.fillText(Math.round((1-((i-5)/30)/20)*10)/10,307,i+5);
+        ctx.fillText((((i-5)/30)/20),i-5,315); //x axis labels 
+        //ctx.fillText(Math.round((1-((i-5)/30)/20)*10)/10,307,i+5); //y axis labels
       }
       ctx.strokeStyle="#ff0700";
       ctx.stroke();
