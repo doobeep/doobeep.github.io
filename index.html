@@ -8,11 +8,28 @@
   <body style="margin: 0; padding: 0;">
     <center>
     <canvas id="grid" 
-      width="610" height="610" style="background: #EFEFEF" style="border: 1px solid #00ff00;"></canvas>
+      width="610" height="610" style="background: #ffa500" style="border: 1px solid #00ff00;"></canvas>
     </center>
     
-    <script>
-      
+    <script type="text/javascript">
+      var cnv=document.getElementById("grid");
+      var ctx= cnv.getContext("2d");
+
+      //small units (100 small squares)
+      for(var i=5; i<=605; i=i+6)
+        {
+          //vertical lines
+          ctx.moveTo(i,5);
+          ctx.lineTo(i,605);
+
+          //horizontal lines
+          ctx.moveTo(5,i);
+          ctx.lineTo(605,i);
+
+          ctx.strokeStyle="#f0f0f0";
+          ctx.stroke();
+        }
+
       
     </script>
   </body>
